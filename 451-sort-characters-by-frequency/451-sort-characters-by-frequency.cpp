@@ -12,7 +12,6 @@ public:
         string ans="";
         while(pq.size()){
             ans+=string(pq.top().first,pq.top().second);
-        
             pq.pop();
         }
         return ans;
