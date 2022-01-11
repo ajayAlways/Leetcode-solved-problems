@@ -11,9 +11,8 @@ public:
         }
         string ans="";
         while(pq.size()){
-            for(int i=0;i<pq.top().first;i++){
-                ans+=pq.top().second;
-            }
+            ans+=string(pq.top().first,pq.top().second);
+        
             pq.pop();
         }
         return ans;
