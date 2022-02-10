@@ -10,7 +10,10 @@
 
 void solve(TreeNode* &original, TreeNode* &cloned, TreeNode* &target, TreeNode* &res){
     if(!original && !cloned) return;
-    if(original == target) res = cloned;
+    if(original == target){
+        res = cloned;
+        return;
+    }
     solve(original->left,cloned->left,target,res);
     solve(original->right,cloned->right,target,res);
 }
