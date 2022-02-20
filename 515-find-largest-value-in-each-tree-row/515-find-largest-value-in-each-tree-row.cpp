@@ -10,19 +10,17 @@
  * };
  */
 class Solution {
-private:
-    int maxLevel=1;
 public:
     void dfs(TreeNode* root,int l,vector<int> &level){
         if(!root) return;
+        if(level.size() < l) level.push_back(root->val);
         level[l-1] = max(level[l-1],root->val);
-        maxLevel = max(maxLevel,l);
         dfs(root->left,l+1,level);        
         dfs(root->right,l+1,level);
     }
     vector<int> largestValues(TreeNode* root) {
         if(!root) return {};
-        vector<int>level(10000,INT_MIN),res;
+        vector<int>res;
         // queue<TreeNode*>q;
         // vector<int>res;
         // q.push(root);
@@ -37,10 +35,7 @@ public:
         //     }
         //     res.push_back(maxVal);
         // }
-        dfs(root,1,level);
-        for(int i=0;i<maxLevel;i++){
-            res.push_back(level[i]);
-        }
+        dfs(root,1,res);
         return res;
     }
 };
