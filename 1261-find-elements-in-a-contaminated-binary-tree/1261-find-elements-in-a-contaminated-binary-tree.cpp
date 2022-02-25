@@ -11,7 +11,7 @@
  */
 class FindElements {
 private:
-    vector<int> check = vector<int>(10000000,0);
+    unordered_set<int> check;
 public:
     void build(TreeNode* child,TreeNode* parent){
         if(!child) return;
@@ -20,7 +20,7 @@ public:
             else child->val = 2*parent->val + 2;
         }
         else child->val = 0;
-        check[child->val] = 1;
+        check.insert(child->val);
         build(child->left,child);
         build(child->right,child);
     }
@@ -29,7 +29,7 @@ public:
     }
     
     bool find(int target) {
-        return check[target];
+        return check.count(target);
     }
 };
 
