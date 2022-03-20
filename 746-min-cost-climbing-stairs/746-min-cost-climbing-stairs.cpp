@@ -1,16 +1,16 @@
 class Solution {
 public:
     int t[10001];
-    int solve(vector<int>&cost, int i){
-        //base case
-        if(i<0) return 0;
-        if(i==0 || i==1) return cost[i];
-        if(t[i]!=0) return t[i];
-        return t[i] = cost[i] + min(solve(cost,i-1),solve(cost,i-2));
+    int solve(vector<int>&cost,int n){
+        for(int i=0;i<n;i++){
+            if(i<2) t[i] = cost[i];
+            else t[i] = cost[i] + min(t[i-1],t[i-2]);
+        }
+        return min(t[n-1],t[n-2]);
     }
     int minCostClimbingStairs(vector<int>& cost) {
         int n = cost.size(),res;
-        res = min(solve(cost,n-1),solve(cost,n-2));
+        res = solve(cost,n);
         return res;
     }
 };
