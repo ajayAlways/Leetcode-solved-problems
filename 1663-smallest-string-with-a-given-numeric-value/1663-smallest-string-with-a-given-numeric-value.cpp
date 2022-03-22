@@ -1,18 +1,17 @@
 class Solution {
 public:
     string getSmallestString(int n, int k) {
-        string res;
+        string res(n,'a');
         for(int i=n;i>0;i--){
             if((k-i+1)>=26){
-                res.push_back('z');
+                res[i-1] = 'z';
                 k-=26;
             }
             else {
-                res.push_back('a'+(k-i));
+                res[i-1]='a'+(k-i);
                 k=i-1;
             }
         }
-        reverse(res.begin(),res.end());
         return res;
     }
 };
