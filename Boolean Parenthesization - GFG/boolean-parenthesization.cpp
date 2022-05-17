@@ -17,11 +17,7 @@ public:
             if(isTrue) return s[i]=='T';
             else return s[i]=='F';
         }
-        string key=to_string(i);
-        key.push_back(' ');
-        key.append(to_string(j));
-        key.push_back(' ');
-        key.append(to_string(isTrue));
+        string key=to_string(i)+" "+to_string(j)+" "+to_string(isTrue);
         if(m.find(key)!=m.end()) return m[key]%1003;
         long ans=0;
         for(int k=i+1;k<=j-1;k+=2){
