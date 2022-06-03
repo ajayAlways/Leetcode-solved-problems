@@ -7,7 +7,7 @@ public:
         vis[node] = 1;
         bool ans = true;
         for(auto& i:adj[node]){
-            if(!dfs(adj,i,vis,dp)) return false;
+            if(!dfs(adj,i,vis,dp)) return ans=false;
         }
         vis[node] = 0;
         return dp[node] = ans;
