@@ -1,5 +1,21 @@
 class Solution {
 public:
+    bool bfs(vector<vector<int>>& adj, int node,vector<int>& vis,int color){
+        queue<pair<int,int>>q;
+        q.push({node,color});
+        while(!q.empty()){
+            auto i = q.front();
+            q.pop();
+            for(auto& j:adj[i.first]){
+                if(vis[j]!=-1 && vis[j]==i.second) return false;
+                if(vis[j]==-1){
+                    q.push({j,!i.second});
+                    vis[j] = !i.second;
+                }
+            }
+        }
+        return true;
+    }
     bool dfs(vector<vector<int>>& adj, int node,vector<int>& vis,int color){
         vis[node] = color;
         for(auto& i:adj[node]){
@@ -19,7 +35,7 @@ public:
         }
         for(int i=1;i<=n;i++){
             if(vis[i]==-1){
-                if(!dfs(adj,i,vis,0)) return false;
+                if(!bfs(adj,i,vis,0)) return false;
             }
         }
         return true;
