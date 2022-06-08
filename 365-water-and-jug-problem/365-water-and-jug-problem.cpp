@@ -2,7 +2,7 @@ class Solution {
 public:
     int gcd(int x, int y){
         int lim = min(x,y),res=1;
-        for(int i=1;i<=lim;i++){
+        for(int i=lim;i>=1;i--){
             if(x%i==0 && y%i==0) res = max(res,i);
         }
         return res;
