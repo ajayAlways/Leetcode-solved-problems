@@ -42,6 +42,9 @@ public:
 //             adj[edges[i][0]][edges[i][1]] = 1;
 //             adj[edges[i][1]][edges[i][0]] = 1;
 //         }
+        
+        
+//         Union Find approach Time - O(n) space - O(n)
         for(int i=0;i<n+1;i++) parent.push_back(i);
         for(auto& i:edges){
             if(checkUnion(i[0],i[1])) return i;
