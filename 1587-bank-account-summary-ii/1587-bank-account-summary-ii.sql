@@ -1,7 +1,7 @@
 # Write your MySQL query statement below
 
 SELECT t1.name, t2.balance FROM
-Users t1 INNER JOIN
+Users t1 JOIN
 (SELECT account, SUM(amount) as balance
 FROM Transactions
 GROUP BY account) t2
