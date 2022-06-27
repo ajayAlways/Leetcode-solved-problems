@@ -15,7 +15,7 @@ public:
         for (int i = 0; i < n; i++) {
             
         	// printFoo() outputs "foo". Do not change or remove this line.
-            while(j%2!=0) cv.wait(lock);
+            if(j%2!=0) cv.wait(lock);
         	printFoo();
             j++;
             cv.notify_all();
@@ -27,7 +27,7 @@ public:
         for (int i = 0; i < n; i++) {
             
         	// printBar() outputs "bar". Do not change or remove this line.
-            while(j%2==0) cv.wait(lock);
+            if(j%2==0) cv.wait(lock);
         	printBar();
             j++;
             cv.notify_all();  
