@@ -6,24 +6,12 @@ public:
     MedianFinder() {}
     
     void addNum(int num) {
-        if(maxHeap.empty()) maxHeap.push(num);
-        else if(maxHeap.size()==minHeap.size()){
-            int temp = minHeap.top();
-            if(num<=temp) maxHeap.push(num);
-            else{
-                minHeap.pop();
-                minHeap.push(num);
-                maxHeap.push(temp);
-            }
-        }
-        else{
-            int temp = maxHeap.top();
-            if(temp<=num) minHeap.push(num);
-            else{
-                maxHeap.pop();
-                maxHeap.push(num);
-                minHeap.push(temp);
-            }
+        maxHeap.push(num);
+        minHeap.push(maxHeap.top());
+        maxHeap.pop();
+        if(minHeap.size()>maxHeap.size()){
+            maxHeap.push(minHeap.top());
+            minHeap.pop();
         }
     }
     
