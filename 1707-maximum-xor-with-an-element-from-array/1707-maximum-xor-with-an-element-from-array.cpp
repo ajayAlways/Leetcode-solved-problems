@@ -62,7 +62,7 @@ public:
             while(inserted<nums.size() && nums[inserted]<=queries[i][1]){
                 trie->insert(nums[inserted++]);
             }
-            if(inserted>0) res[queries[i][2]] = trie->XOR(queries[i][0]);
+            if(inserted!=0) res[queries[i][2]] = trie->XOR(queries[i][0]);
         }
         
         return res;
