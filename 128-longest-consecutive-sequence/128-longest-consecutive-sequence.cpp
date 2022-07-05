@@ -14,5 +14,8 @@ public:
         }
         
         return max(res,cnt);
+        
+//         O(n) sol
+        // use set to store all elements and if current element preceding element is in set and no need to compute as this number would be already in the longest sequence.
     }
 };
