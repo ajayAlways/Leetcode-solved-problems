@@ -4,7 +4,6 @@ public:
         int n = points.size(),res=0;
         if(n==1) return 1;
         sort(points.begin(),points.end());
-        unordered_map<int,int>m1;
         unordered_map<float,int>m2;
         for(int i=0;i<n-1;i++){
             m2 = unordered_map<float,int>();
@@ -16,10 +15,7 @@ public:
                 else if(points[j][1]-points[i][1]>0) m2[INT_MAX]++;
                 else m2[INT_MIN]++;
             }
-            for(auto& sl:m2) m1[i] = max(m1[i],sl.second);
-        }
-        for(auto& sl:m1){
-            res = max(res,sl.second);
+            for(auto& sl:m2) res = max(res,sl.second);
         }
         
         return res+1;
