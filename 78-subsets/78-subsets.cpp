@@ -1,23 +1,21 @@
-
-void solve(vector<int>ip,vector<int>op,vector<vector<int> >&ans){
-    if(ip.size()==0){
-        ans.push_back(op);
-        return;
-    }
-    vector<int>op1 = op,op2 = op;
-    op2.push_back(ip.back());
-    ip.pop_back();
-    solve(ip,op1,ans);
-    solve(ip,op2,ans);
-}
-
 class Solution {
 public:
+    void findSubsets(vector<int>& nums,vector<vector<int>>&res,vector<int> &curSubSet,int pos){
+        if(pos==nums.size()){
+            res.push_back(curSubSet);
+            return;
+        }
+        findSubsets(nums,res,curSubSet,pos+1);
+        curSubSet.push_back(nums[pos]);
+        findSubsets(nums,res,curSubSet,pos+1);
+        curSubSet.pop_back();
+}
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>>ans;
-        vector<int>op={};
-        solve(nums,op,ans);
-        return ans;
-        
+        vector<vector<int>>res;
+        vector<int>curSubSet;
+        // sort(A.begin(),A.end());
+        findSubsets(nums,res,curSubSet,0);
+        // sort(res.begin(),res.end());
+        return res;
     }
 };
