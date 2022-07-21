@@ -8,30 +8,35 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-
-
-
 class Solution {
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        if(head==NULL || head->next==NULL) return head;
-        ListNode *dummy = new ListNode(-1);
-        ListNode *prev=NULL,*cur=dummy,*next,*temp1,*temp2;
+        ListNode* dummy = new ListNode(INT_MIN),*prev,*cur,*next,*lef,*righ;
         dummy->next = head;
-        
-        for(int i=1;i<left;i++) cur = cur->next;
-        temp1 = cur;
-        temp2 = cur->next;
-        cur = cur->next;
-        for(int i=0;i<=right-left;i++){
+        head = dummy;
+        int count = left - 1;
+        while(count){
+            head = head->next;
+            count--;
+        }
+        count = right - left+1;
+        lef = head;
+        righ = head->next;
+        prev = NULL;
+        cur = head->next;
+        while(cur && count){
             next = cur->next;
             cur->next = prev;
             prev = cur;
             cur = next;
+            count--;
         }
-        temp1->next = prev;
-        temp2->next = cur;
+        lef->next = prev;
+        righ->next = cur;
         
-        return dummy->next;
+        head = dummy->next;
+        delete(dummy);
+        
+        return head;
     }
 };
