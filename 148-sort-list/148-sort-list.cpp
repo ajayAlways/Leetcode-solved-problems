@@ -10,37 +10,40 @@
  */
 class Solution {
 public:
-    ListNode* merge(ListNode* head1, ListNode* head2){
-        ListNode* dummy = new ListNode(0);
-        ListNode* cur = dummy;
-        while(head1 && head2){
-            if(head1->val < head2->val){
-                cur->next = head1;
-                head1 = head1->next;
+    
+    ListNode* merge(ListNode* h1, ListNode* h2){
+        ListNode *dummy = new ListNode(),*head = dummy;
+        while(h1 && h2){
+            if(h1->val < h2->val){
+                head->next = h1;
+                h1 = h1->next;
             }
             else{
-                cur->next = head2;
-                head2 = head2->next;
+                head->next = h2;
+                h2 = h2->next;
             }
-            cur = cur->next; 
+            head = head->next;
         }
-        if(head1) cur->next = head1;
-        if(head2) cur->next = head2;
+        if(h1) head->next = h1;
+        if(h2) head->next = h2;
         
-        return dummy->next;
+        head = dummy->next;
+        delete(dummy);
+        
+        return head;
     }
+    
     ListNode* sortList(ListNode* head) {
         if(!head || !head->next) return head;
-        ListNode* dummy = new ListNode(0);
-        dummy->next = head;
-        ListNode* slow = dummy;
-        ListNode* fast = head;
+        ListNode *slow = head, *fast = head->next;
         while(fast && fast->next){
             slow = slow->next;
             fast = fast->next->next;
         }
-        ListNode* listTwo = slow->next;
+        ListNode *head2 = slow->next,*mergedHead=NULL;
         slow->next = NULL;
-        return merge(sortList(head),sortList(listTwo));
+        mergedHead = merge(sortList(head),sortList(head2));
+        
+        return mergedHead;
     }
 };
