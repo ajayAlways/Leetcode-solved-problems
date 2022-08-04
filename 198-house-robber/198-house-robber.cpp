@@ -1,14 +1,14 @@
 class Solution {
 public:
-    int t[101];
-    int solve(vector<int>nums, int n){
-        if(n<0) return 0;
-        if(t[n]!=-1) return t[n];
-        return t[n] = max(nums[n]+solve(nums,n-2),solve(nums,n-1));
-    }
     int rob(vector<int>& nums) {
-        memset(t,-1,sizeof(t));
-        int res = solve(nums,nums.size()-1);
-        return res;
+        int n = nums.size();
+        if(n==1) return nums[0];
+        vector<int>dp(n,0);
+        dp[0] = nums[0];
+        dp[1] = max(nums[1],nums[0]);
+        for(int i=2;i<n;i++){
+            dp[i] = max(nums[i]+dp[i-2],dp[i-1]);
+        }
+        return dp[n-1];
     }
 };
