@@ -1,21 +1,25 @@
 class Solution {
 private:
-    int t[1001];
+    int memo[1001];
 public:
-    int solve(vector<int>& nums, int target){
-        if(target<=0) return 1;
-        if(t[target]!=-1) return t[target];
+    
+    int solve(vector<int>&nums,int target, int sum){
+        if(sum==target){
+            return 1;
+        }
+        if(memo[sum]!=-1) return memo[sum];
         int res=0;
         for(int i=0;i<nums.size();i++){
-            if(nums[i]<=target){
-                res+=solve(nums,target-nums[i]);
-            }
+            if(sum+nums[i]<=target) res+=solve(nums,target,sum+nums[i]);
         }
-        return t[target] = res;
+        return memo[sum] = res;
     }
+    
     int combinationSum4(vector<int>& nums, int target) {
-        memset(t,-1,sizeof t);
-        return solve(nums,target);
+        int res=0;
+        memset(memo,-1,sizeof memo);
+        res = solve(nums,target,0);
         
+        return res;
     }
 };
