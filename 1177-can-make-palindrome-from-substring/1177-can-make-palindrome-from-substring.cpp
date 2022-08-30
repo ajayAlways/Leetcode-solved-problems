@@ -1,23 +1,24 @@
 class Solution {
 public:
     vector<bool> canMakePaliQueries(string s, vector<vector<int>>& queries) {
-        vector<bool>ans(queries.size(),false);
-        vector<vector<int>>prefix;
+        int n = s.length();
+        vector<vector<int>>freq;
         vector<int>temp(26,0);
-        prefix.push_back(temp);
-        for(int i=0;i<s.length();i++){
+        vector<bool>res;
+        freq.push_back(temp);
+        for(int i=0;i<n;i++){
             temp[s[i]-'a']++;
-            prefix.push_back(temp);
+            freq.push_back(temp);
         }
-        for(int i=0;i<queries.size();i++){
-        int count=0,l=queries[i][0],h=queries[i][1],num=queries[i][2];
-        vector<int>temp = prefix[h+1];
-        for(int i=0;i<26;i++){
-            temp[i]-=prefix[l][i];
-            count+=temp[i]%2;
+        for(auto& i:queries){
+            int odds=0;
+            for(int j=0;j<26;j++){
+                if((freq[i[1]+1][j] - freq[i[0]][j])%2!=0) odds++;
+            }
+            if(odds/2 <=i[2]) res.push_back(true);
+            else res.push_back(false);
         }
-        ans[i] = count<=2*num+(h-l+1)%2;
-        }
-        return ans;
+        
+        return res;
     }
 };
