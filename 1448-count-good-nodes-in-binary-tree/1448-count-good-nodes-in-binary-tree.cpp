@@ -10,18 +10,19 @@
  * };
  */
 class Solution {
-private:
-    int res=0;
 public:
-    void solve(TreeNode* root,int maxVal){
-        if(!root) return;
-        if(root->val>=maxVal) res++;
-        solve(root->left,max(root->val,maxVal));
-        solve(root->right,max(root->val,maxVal));
+    
+    int solve(TreeNode* root, int curMax){
+        if(!root) return 0;
+        int res = 0;
+        if(root->val>=curMax) res+=1;
+        curMax = max(curMax,root->val);
+        res+=solve(root->left,curMax) + solve(root->right,curMax);
+        
+        return res;
     }
     
     int goodNodes(TreeNode* root) {
-        solve(root,root->val);
-        return res;
+        return solve(root,INT_MIN);
     }
 };
