@@ -1,16 +1,19 @@
 class Solution {
 public:
-    bool static comp(vector<int>& a, vector<int>& b){
+    
+    static bool comp(vector<int> &a, vector<int> &b){
         if(a[0]==b[0]) return a[1]>b[1];
-        return a[0]<b[0];
+        return a[0] < b[0];
     }
-    int numberOfWeakCharacters(vector<vector<int>>& properties) {
-        int n = properties.size(),res=0,maxi;
-        sort(properties.begin(),properties.end(),comp);
-        maxi = properties.back()[1];
+    
+    int numberOfWeakCharacters(vector<vector<int>>& prop) {
+        int n = prop.size();
+        sort(prop.begin(),prop.end(),comp);
+        int maxi = prop.back()[1],res=0;
+        
         for(int i=n-1;i>=0;i--){
-            if(properties[i][1]<maxi) res++;
-            maxi = max(properties[i][1],maxi);
+            if(prop[i][1]<maxi) res++;
+            maxi = max(prop[i][1],maxi);
         }
         
         return res;
