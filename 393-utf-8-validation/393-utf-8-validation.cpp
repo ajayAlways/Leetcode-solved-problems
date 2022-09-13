@@ -20,7 +20,6 @@ public:
                 i++;
                 if(i>=n) return false;
                 int t = (data[i]>>7 & 1)*10 + (data[i]>>6 & 1);
-                cout<<t<<endl;
                 if(t!=10) return false;
                 cnt--;
             }
